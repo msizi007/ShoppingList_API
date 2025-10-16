@@ -1,5 +1,7 @@
 ### Shopping List API
 
+![ShoppingList_API](https://socialify.git.ci/msizi007/ShoppingList_API/image?language=1&owner=1&name=1&stargazers=1&theme=Light)
+
 ###### Installation Setup
 
 1. Clone the project using the command:
