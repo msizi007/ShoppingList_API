@@ -1,11 +1,16 @@
 import http from "http";
+import { itemsRoute } from "./routes/items";
 
 const PORT = 3001;
 
 const server = http.createServer((req, res) => {
-  res.writeHead(200, { "Content-Type": "application/json" });
-  res.end(JSON.stringify({ message: "Hello, world!" }));
-  return;
+  if (req.url?.startsWith("/items")) {
+    itemsRoute(req, res);
+    return;
+  } else {
+    res.writeHead(404, { "Content-Type": "application/json" });
+    res.end(JSON.stringify({ message: "Not found" }));
+  }
 });
 
 server.listen(PORT, () => {
