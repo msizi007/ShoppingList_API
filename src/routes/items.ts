@@ -1,5 +1,6 @@
 import { IncomingMessage, ServerResponse } from "http";
 import { getItems, getItemById, addItem } from "../controllers/items";
+import { log } from "console";
 
 // http:localhost:3001/items/1
 
@@ -36,7 +37,7 @@ export const itemsRoute = async (req: IncomingMessage, res: ServerResponse) => {
       });
 
       req.on("end", () => {
-        const { name, quantity, price, status } = JSON.parse(body);
+        const { name, quantity, price, isPurchased } = JSON.parse(body);
 
         if (!name || typeof name !== "string") {
           res.writeHead(400, { "Content-Type": "application/json" });
@@ -56,12 +57,15 @@ export const itemsRoute = async (req: IncomingMessage, res: ServerResponse) => {
           return;
         }
 
-        if (!status || typeof status !== "string") {
+        if (
+          typeof isPurchased === "undefined" ||
+          typeof isPurchased !== "boolean"
+        ) {
           res.writeHead(400, { "Content-Type": "application/json" });
-          res.end(JSON.stringify({ message: "Status is required" }));
+          res.end(JSON.stringify({ message: "isPurchased is required" }));
           return;
         }
-        const newItem = addItem(name, quantity, price, status);
+        const newItem = addItem(name, quantity, price, isPurchased);
         res.writeHead(201, { "Content-Type": "application/json" });
         res.end(JSON.stringify(newItem));
       });

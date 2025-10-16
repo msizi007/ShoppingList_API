@@ -6,7 +6,7 @@ let items: Item[] = [
     name: "Milk",
     quantity: 1,
     price: 2.99,
-    status: "Available",
+    isPurchased: true,
   },
 ];
 let idCounter = 2;
@@ -23,14 +23,14 @@ export const addItem = (
   name: string,
   quantity: number,
   price: number,
-  status: string
+  isPurchased: boolean
 ): Item => {
   const newItem: Item = {
     id: idCounter++,
     name,
     quantity,
     price,
-    status,
+    isPurchased,
   };
   items.push(newItem);
   return newItem;
