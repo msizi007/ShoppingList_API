@@ -23,7 +23,7 @@ export const addItem = (
   name: string,
   quantity: number,
   price: number,
-  isPurchased: boolean
+  isPurchased: boolean,
 ): Item => {
   const newItem: Item = {
     id: idCounter++,
@@ -45,12 +45,16 @@ export const updateItem = (id: number, updatedItem: Item): Item | undefined => {
       item.isPurchased = updatedItem.isPurchased;
     }
   });
-  return updatedItem;
+  return items.find((item) => item.id === id);
 };
 
-export const deleteItem = (id: number): Item[] => {
+export const deleteItem = (id: number): boolean => {
+  const numItems = items.length;
+
   items = items.filter((item) => item.id !== id);
-  return items;
+
+  // If the length is different, something was deleted
+  return items.length !== numItems;
 };
 
 export const patchItem = (id: number, updatedItem: Item): Item | undefined => {
@@ -59,8 +63,9 @@ export const patchItem = (id: number, updatedItem: Item): Item | undefined => {
       item.name = updatedItem.name || item.name;
       item.quantity = updatedItem.quantity || item.quantity;
       item.price = updatedItem.price || item.price;
-      item.isPurchased = updatedItem.isPurchased || item.isPurchased;
+      item.isPurchased = item.isPurchased =
+        updatedItem.isPurchased ?? item.isPurchased;
     }
   });
-  return updatedItem;
+  return items.find((item) => item.id === id);
 };

@@ -7,9 +7,6 @@ import {
   deleteItem,
   patchItem,
 } from "../controllers/items";
-import { log } from "console";
-
-// http:localhost:3001/items/1
 
 export const itemsRoute = async (req: IncomingMessage, res: ServerResponse) => {
   if (req.url?.startsWith("/items")) {

@@ -32,13 +32,36 @@ npm run dev
 
 ###### API Methods
 
-- GET
+```bash
+* GET
   - http://localhost:3000/items
   - http://localhost:3000/items/1
-- POST
+* POST
+  - http://localhost:3000/items
+  BODY:
+  {
+    "name": "Eggs",
+    "quantity": 22,
+    "price": 2.99,
+    "isPurchased": true
+  }
 - PUT
+  - http://localhost:3000/items/1
+  BODY:
+  {
+    "name": "Milk",
+    "quantity": 22,
+    "price": 2.99,
+    "isPurchased": true
+  }
 - PATCH
+  - http://localhost:3000/items/1
+  BODY:
+  {
+    "isPurchased": false
+  }
+```
 
 ###### Tech Stack
 
-- Http (Nodejs) - API
+- Http (Nodejs) using nodemon
